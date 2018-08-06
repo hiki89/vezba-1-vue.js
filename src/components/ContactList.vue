@@ -14,9 +14,10 @@
             <th>Email</th>
         </thead>
         <tbody>
-            <tr v-for="(contact, key) in contacts" :key="key">
+            <tr v-for="contact in contacts" :key="contact.id">
                <td>{{contact.name}}</td> 
                <td>{{contact.email}}</td> 
+               <button @click="deleteContact(contact)">Delete</button>
             </tr>
         </tbody>
     </table>
@@ -29,10 +30,10 @@ export default {
   data() {
       return {
           contacts: [
-              {name:"John", email:"example1@gmail.com"},
-              {name:"Jack", email:"example2@gmail.com"},
-              {name:"Susan", email:"example3@gmail.com"},
-              {name:"Jane", email:"example4@gmail.com"}
+              {id: 1, name:"John", email:"example1@gmail.com"},
+              {id: 2, name:"Jack", email:"example2@gmail.com"},
+              {id: 3, name:"Susan", email:"example3@gmail.com"},
+              {id: 4, name:"Jane", email:"example4@gmail.com"}
           ],
           newContact: {
 
@@ -43,6 +44,10 @@ export default {
       addContact() {
           this.contacts.push(this.newContact);
           this.newContact = {}
+      },
+      deleteContact(contact) {
+          let indexOfContactToDelete = this.contacts.indexOf(contact);
+          this.contacts.splice(indexOfContactToDelete, 1);
       }
   }
 }
